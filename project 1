@@ -1,0 +1,60 @@
+create database rajesh;
+use rajesh;
+
+create table  categories(categories_id int primary key,
+categories_name varchar(108) unique not null);
+
+
+
+insert into categories values(6,'naveen'),(7,'vassu'),(8,'sunny');
+select *from categories;
+
+
+create table  publishers(publishers_id int primary key,
+publishers_name varchar(108) not null);
+
+
+insert into publishers values(66,'book'),(77,'pens'),(88,'notes');
+select * from publishers;
+
+
+create table users(users_id int primary key,
+users_name varchar(108) not null,
+email varchar(108) not null,
+phone_number varchar(108) unique not null);
+
+
+insert into users values(101,'veen','v@gmail.com','789'),(102,'pin','p@gmail.com','987'),(103,'sun','s@gmail.com','897');
+select* from users;
+
+
+create table books(books_id int primary key,
+title varchar(108) not null,
+isbn varchar(108) unique not null,
+publiction_year int not null,
+publishers_id int,
+categories_id int,
+foreign key(publishers_id)references publishers(publishers_id) on delete cascade,
+foreign key(categories_id)references categories(categories_id) on delete cascade,
+author_name varchar(108) check(author_name !=''));
+insert into books values (66,'kalyan','praveen',88,77,8,'surya');
+select *from books;
+
+
+create table borrowings(borrowing_Id int primary key,
+users_id int,
+books_id int,
+foreign key(users_id)references users(users_id) on delete cascade,
+foreign key(books_id) references books(books_id) on delete cascade,
+borrow_date int not null,
+retundate int not null);
+insert into borrowings values (15,101,66,55,88);
+select*from borrowings; 
+
+
+
+select *from categories;
+select*from publishers;
+select*from users;
+select*from books;
+
